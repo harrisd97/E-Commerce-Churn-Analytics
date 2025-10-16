@@ -1,4 +1,4 @@
-# 📈 Predictive Churn Analytics: Driving Retention at Tolson Tech
+# 📈 Predictive Churn Analytics
 
 **Project Focus:** Developing a high-accuracy Machine Learning solution to identify and mitigate critical customer churn risks in an E-Commerce environment.
 
