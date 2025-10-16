@@ -4,7 +4,7 @@
 
 ---
 
-## Executive Summary
+## Project Summary
 
 This project addresses the critical business problem of customer churn. By analyzing customer data, we built and evaluated two models to predict which customers are likely to leave. The final model, a **Decision Tree Classifier**, achieved high accuracy and recall, enabling the business to proactively target at-risk customers with retention campaigns.
 
