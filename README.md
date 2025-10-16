@@ -1,55 +1,63 @@
-# 📊 E-Commerce Churn Analytics  
-
-Predicting **customer churn** for an e-commerce platform using **Data Analysis and Machine Learning**.
+# 📈 Churn Analytics: E-Commerce Customer Retention Analysis
 
 ---
 
-## 🚀 Project Overview  
+## 💡 Project Goal
 
-This project analyzes customer behavior and transactions to predict churn probability.  
-The goal is to help businesses identify **at-risk customers** and take **preventive measures** to retain them.
-
----
-
-## 📂 Project Files  
-
-📌 `E-Commerce Churn Data.csv` - Dataset containing customer behavior, purchase history, and churn status.  
-📌 `Group-6.ipynb` - Jupyter Notebook with **EDA, feature engineering, and ML model training**.  
+The objective of this project was to identify and analyze the primary factors driving customer churn for an e-commerce platform. Using **Exploratory Data Analysis (EDA)** and **Machine Learning**, we developed a predictive model to accurately flag at-risk customers and provided actionable strategies to improve customer retention.
 
 ---
 
-## 🛠️ Technologies & Tools  
+## 🧹 Data Cleaning & Pre-processing
 
-| **Category**  | **Technologies Used** |
-|--------------|-----------------------|
-| **Programming Language** | Python |
-| **Libraries** | Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn |
-| **Machine Learning Models** | Logistic Regression, Random Forest, XGBoost, Decision Trees |
-| **Data Processing** | Feature Engineering, Data Cleaning, Scaling |
-| **Visualization** | Matplotlib, Seaborn |
+The initial dataset (5,630 records) contained missing values and inconsistent categorical labels.
 
----
+### Key Cleaning Steps
 
-## 🔍 Key Steps in Analysis  
-
-1️⃣ **Exploratory Data Analysis (EDA)** – Understanding customer trends and purchase behaviors.  
-2️⃣ **Feature Engineering** – Creating new features to improve model predictions.  
-3️⃣ **Machine Learning Model Training** – Comparing models like **Logistic Regression, XGBoost, Random Forest**.  
-4️⃣ **Model Evaluation** – Accuracy, Precision, Recall, F1-Score, ROC-AUC.  
-5️⃣ **Insights & Recommendations** – Suggesting strategies to **reduce churn** and improve customer retention.  
+1.  **Missing Data Imputation:** Missing values (ranging from 4.46% to 5.45% of the data) in all numerical columns (`Tenure`, `WarehouseToHome`, etc.) were filled using the **median** due to skewed distributions.
+2.  **Categorical Standardization:** Inconsistent values were unified (e.g., 'Phone' $\rightarrow$ 'Mobile Phone'; 'COD' $\rightarrow$ 'Cash on Delivery').
+3.  **Feature Engineering:** Four high-impact flag features were created based on EDA patterns, including:
+    * `ShortTenureFlag` ($\leq 5$ months)
+    * `Tier3_MobilePhone` (Highest churn interaction)
 
 ---
 
-## 📊 Dataset Information  
+## 📊 Exploratory Data Analysis (EDA) - Key Insights
 
-- **Customer Demographics** (Age, Location, Signup Date)  
-- **Purchase Behavior** (Frequency, Recency, Monetary Value)  
-- **Engagement Metrics** (Browsing Time, Interactions)  
-- **Churn Label** (1 = Churned, 0 = Retained)  
+The overall churn rate for the platform is **17%**. Analysis focused on identifying specific segments with the highest risk:
+
+| High-Risk Segment | Churn Rate | Primary Driver/Insight |
+| :--- | :--- | :--- |
+| **New Customers** | **29.0%** (Tenure 0-5 months) | High early-stage volatility and low initial loyalty. |
+| **"Satisfied" Churners** | **24.0%** (Satisfaction Score 5) | External/unaccounted operational issues, despite high survey satisfaction. |
+| **Logistics Risk** | **21.0%** (Distance 26-50 units) | Likely impacted by delivery times or cost due to warehouse distance. |
+| **Single, Low-Commitment Payments** | **42.7% - 44.4%** | Single customers using Cash on Delivery or E-Wallet show extreme churn risk. |
+| **Tier 3 Mobile Shoppers** | **42.2%** | Highest single interaction risk, suggesting regional supply/delivery challenges. |
 
 ---
 
-## 🚀 How to Run the Notebook  
+## 🤖 Model Performance & Selection
 
-### **🔹 Open in Google Colab**  
-📌 **[Open E-Commerce Churn Notebook](https://colab.research.google.com/github/harrisd97/E-Commerce-Churn-Analytics/blob/main/Group-6.ipynb)**  
+We compared Logistic Regression (LR) with a Decision Tree (DT) model, prioritizing **Recall** to ensure maximum identification of true churners.
+
+### Evaluation Summary
+
+| Metric | Logistic Regression (LR) | Decision Tree (DT) |
+| :--- | :--- | :--- |
+| **Accuracy** | 90.4% | **96.98%** |
+| **Precision** | 80.8% | **91.26%** |
+| **Recall (CRITICAL)** | 54.6% | **90.27%** |
+| **F1 Score** | 65.2% | **90.76%** |
+
+The **Decision Tree model** is the preferred solution, offering a dramatic improvement in **Recall** (from 54.6% to **90.3%**), making it highly effective for targeted retention efforts.
+
+---
+
+## ✅ Actionable Retention Strategies
+
+Based on the highest-impact churn factors, the following recommendations are key to reducing the 17% churn rate:
+
+* **Proactive Onboarding:** Launch a personalized engagement and support program immediately for **new customers ($\leq 5$ months tenure)** to mitigate early-stage volatility.
+* **Logistics Optimization:** Enhance delivery speed or offer discounted shipping for customers in the **26-50 unit distance** range.
+* **Deep Customer Feedback:** Investigate the reasons behind churn among **highly satisfied customers (Score 5)**, potentially through qualitative feedback, to uncover hidden pain points.
+* **Payment Incentives:** Promote committed payment methods (Credit/Debit Card) to the **Single_COD_EWallet** group with exclusive loyalty benefits or small-value cashback offers.
